@@ -1,0 +1,16 @@
+.profile__avatar-button {
+  grid-area: avatar;
+  width: 26px;
+  height: 26px;
+  background: url('../../../images/Vec.png') no-repeat;
+  background-position: center;
+  opacity: 0;
+  z-index: 5;
+  border: none;
+  padding: 60px;
+}
+
+.profile__avatar-button:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+}

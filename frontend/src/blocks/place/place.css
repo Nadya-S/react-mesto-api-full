@@ -1,0 +1,8 @@
+.place {
+  list-style-type: none;
+  background-color: #fff;
+  border-radius: 5%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}

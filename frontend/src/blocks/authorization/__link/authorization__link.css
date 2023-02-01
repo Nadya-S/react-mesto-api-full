@@ -1,0 +1,16 @@
+.authorization__link {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.22;
+  min-height: 27px;
+  color: rgba(255, 255, 255, 1);
+  text-decoration: none;
+  margin: 15px auto 0 auto;
+}
+
+.authorization__link:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}

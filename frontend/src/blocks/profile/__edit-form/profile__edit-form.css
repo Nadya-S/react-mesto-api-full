@@ -1,0 +1,9 @@
+.profile__edit-form {
+    max-width: 300px;
+}
+
+@media screen and (max-width: 695px) {
+    .profile__edit-form {
+        max-width: 200px;
+    }
+}

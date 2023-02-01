@@ -1,0 +1,9 @@
+.place__like-button_active {
+    background: url(../../../../images/blackhurt.png);
+    width: 22px;
+    height: 19px;
+    border: none;
+    background-position: center;
+    margin: auto 0;
+    opacity: 1;
+  }
