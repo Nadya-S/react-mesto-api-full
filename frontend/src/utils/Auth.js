@@ -1,6 +1,7 @@
 class Auth {
   constructor() {
-    this.baseUrl = "https://auth.nomoreparties.co";
+    this.baseUrl = "https://api.mesto.ns.nomoredomainsclub.ru";
+    // this.baseUrl = "https://auth.nomoreparties.co";
     this._headers = {
       "Content-Type": "application/json",
     };
