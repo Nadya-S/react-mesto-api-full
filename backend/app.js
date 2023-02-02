@@ -4,9 +4,9 @@ const { PORT = 3000 } = process.env;
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const cors = require('cors');
+// const cors = require('cors');
 const { errors } = require('celebrate');
-// const corsHandling = require('./middlewares/cors-handling');
+const corsHandling = require('./middlewares/cors-handling');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const authRouter = require('./routes/auth');
 const auth = require('./middlewares/auth');
@@ -15,18 +15,19 @@ const cardRouter = require('./routes/cards');
 const { NotFoundError } = require('./errors/Errors');
 const err = require('./middlewares/err');
 
-const corsOptions = {
-  origin: [
-    'http://mesto.ns.nomoredomainsclub.ru',
-    'https://mesto.ns.nomoredomainsclub.ru',
-    'https://api.mesto.ns.nomoredomainsclub.ru',
-    'http://api.mesto.ns.nomoredomainsclub.ru',
-    'http://localhost:3000/',
-  ],
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
+// const corsOptions = {
+//   origin: [
+//     'http://mesto.ns.nomoredomainsclub.ru',
+//     'https://mesto.ns.nomoredomainsclub.ru',
+//     'https://api.mesto.ns.nomoredomainsclub.ru',
+//     'http://api.mesto.ns.nomoredomainsclub.ru',
+//     'http://localhost:3001/',
+//   ],
+//   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+//   allowedHeaders: ['Content-type', 'origin', 'Aithorization'],
+// };
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -36,7 +37,8 @@ const limiter = rateLimit({
 });
 
 const app = express();
-app.use('*', cors(corsOptions));
+// app.use(cors());
+app.use(corsHandling);
 
 app.use(helmet());
 app.use(limiter);
