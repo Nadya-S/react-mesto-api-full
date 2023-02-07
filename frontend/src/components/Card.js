@@ -5,16 +5,6 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   const currentUser = useContext(CurrentUserContext);
 
-  const isOwn = card.owner._id === currentUser._id;
-  const cardDeleteButtonClassName = `button ${
-    isOwn ? "place__delete-button" : ""
-  }`;
-
-  const isLiked = card.likes.some((user) => user._id === currentUser._id);
-  const cardLikeButtonClassName = `button ${
-    isLiked ? "place__like-button_active" : "place__like-button"
-  }`;
-
   const handleClick = () => {
     onCardClick(card);
   };
@@ -26,6 +16,16 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   const handleDeleteClick = () => {
     onCardDelete(card);
   };
+
+  const isOwn = card.owner === currentUser._id;
+  const cardDeleteButtonClassName = `button ${
+    isOwn ? "place__delete-button" : ""
+  }`;
+  
+  const isLiked = card.likes.some(user => user === currentUser._id);
+  const cardLikeButtonClassName = `button ${
+    isLiked ? "place__like-button_active" : "place__like-button"
+  }`;
 
   return (
     <li className="place">

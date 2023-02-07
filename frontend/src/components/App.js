@@ -30,11 +30,12 @@ const App = () => {
   const history = useHistory();
 
   const auth = (token) => {
-    return Auth.checkToken(token)
+    return Auth.getMe(token)
       .then((res) => {
         if (res) {
           setLoggedIn(true);
-          setUserEmail(res.data.email);
+          setUserEmail(res.email);
+          history.push('/');
         }
       })
       .catch((err) => {
@@ -47,15 +48,15 @@ const App = () => {
     if (token) {
       auth(token);
     }
-  }, []);
+  },);
 
   useEffect(() => {
     if (loggedIn) history.push("/");
-  }, [loggedIn]);
-
+  }, [loggedIn]);    
+        
   useEffect(() => {
     if (loggedIn) {
-      Api.getInitialCards()
+       Api.getInitialCards()
         .then((cards) => {
           setCards(cards);
         })
@@ -130,7 +131,7 @@ const App = () => {
   };
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    const isLiked = card.likes.some(user => user === currentUser._id);
 
     Api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -158,6 +159,7 @@ const App = () => {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("token", data.token);
+          Api.setToken();
           setLoggedIn(true);
           history.push("/");
         }
@@ -194,7 +196,7 @@ const App = () => {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
-          <Header setLoggedIn={setLoggedIn} userEmail={userEmail} />
+          <Header setLoggedIn={setLoggedIn} userEmail={userEmail}/>
           <Switch>
             <ProtectedRoute
               exact

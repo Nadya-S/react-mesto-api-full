@@ -1,7 +1,7 @@
 class Auth {
   constructor() {
-    // this.baseUrl = "http://localhost:3000";
     this.baseUrl = "https://api.mesto.ns.nomoredomainsclub.ru";
+    // this.baseUrl = "http://localhost:3000";
     // this.baseUrl = "https://auth.nomoreparties.co";
     this._headers = {
       "Content-Type": "application/json",
@@ -30,7 +30,7 @@ class Auth {
     }).then(this._checkResponse);
   }
 
-  checkToken(token) {
+  getMe(token) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "GET",
       headers: {

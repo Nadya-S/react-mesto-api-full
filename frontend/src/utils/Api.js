@@ -1,7 +1,19 @@
 class Api {
-  constructor({ baseUrl, headers }) {
-    this._baseUrl = baseUrl;
-    this._headers = headers;
+  constructor() {
+    this._baseUrl = "https://api.mesto.ns.nomoredomainsclub.ru";
+    // baseUrl: "http://localhost:3000",
+    // baseUrl: "https://mesto.nomoreparties.co/v1/cohort-49",
+    this._headers = {
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    };
+  }
+
+  setToken() {
+    this._headers = {
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    };
   }
 
   //загрузка карточек с сервера
@@ -93,10 +105,4 @@ class Api {
   }
 }
 
-export default new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-49",
-  headers: {
-    authorization: "012c11e6-d94d-48ce-8149-d55040a18b33",
-    "Content-Type": "application/json",
-  },
-});
+export default new Api();

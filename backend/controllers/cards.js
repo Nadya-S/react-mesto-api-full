@@ -7,14 +7,7 @@ module.exports.findAllCards = (req, res, next) => {
     .then((cards) => {
       const newCards = [];
       cards.forEach((card) => {
-        const cardData = {
-          name: card.name,
-          link: card.link,
-          owner: card.owner,
-          likes: card.likes,
-          createdAt: card.createdAt,
-        };
-        newCards.push(cardData);
+        newCards.push(card);
       });
       res.send(newCards);
     })
@@ -28,12 +21,7 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .then((card) => {
-      const cardData = {
-        name: card.name,
-        link: card.link,
-        _id: card._id,
-      };
-      res.send(cardData);
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -76,8 +64,8 @@ module.exports.likeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(new Error('NotValidId'))
-    .then(() => {
-      res.send({ message: 'Лайк' });
+    .then((card) => {
+      res.send(card);
     })
     .catch((err) => {
       if (err.message === 'NotValidId') {
@@ -100,8 +88,8 @@ module.exports.dislikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(new Error('NotValidId'))
-    .then(() => {
-      res.send({ message: 'Дизлайк' });
+    .then((card) => {
+      res.send(card);
     })
     .catch((err) => {
       if (err.message === 'NotValidId') {

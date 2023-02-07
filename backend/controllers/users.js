@@ -28,14 +28,15 @@ module.exports.findMyProfile = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(new Error('NotValidId'))
     .then((user) => {
-      const userData = {
-        name: user.name,
-        about: user.about,
-        email: user.email,
-        avatar: user.avatar,
-        _id: user._id,
-      };
-      res.send(userData);
+      res.send(user);
+      // const userData = {
+      //   name: user.name,
+      //   about: user.about,
+      //   email: user.email,
+      //   avatar: user.avatar,
+      //   _id: user._id,
+      // };
+      // res.send(userData);
     })
     .catch((err) => {
       if (err.message === 'NotValidId') {
@@ -79,12 +80,7 @@ module.exports.updateProfile = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
     .orFail(new Error('NotValidId'))
     .then((user) => {
-      const userData = {
-        name: user.name,
-        about: user.about,
-      };
-
-      res.send(userData);
+      res.send(user);
     })
     .catch((err) => {
       if (err.message === 'NotValidId') {
@@ -105,11 +101,7 @@ module.exports.updateAvatar = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
     .orFail(new Error('NotValidId'))
     .then((user) => {
-      const userData = {
-        avatar: user.avatar,
-      };
-
-      res.send(userData);
+      res.send(user);
     })
     .catch((err) => {
       if (err.message === 'NotValidId') {
