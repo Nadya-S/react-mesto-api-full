@@ -5,7 +5,7 @@ module.exports.regExeLink = /^(http|https)\:\/\/(www\.)?[a-z0-9\-]*\.[a-z]*[a-zA
 
 module.exports.idValidator = celebrate({
   params: Joi.object().keys({
-    _id: Joi.string().alphanum().length(24).hex(),
+    _id: Joi.string().length(24).hex(),
   }),
 });
 
@@ -28,14 +28,14 @@ module.exports.createUserValidator = celebrate({
 
 module.exports.updateProfileValidator = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
+    about: Joi.string().required().min(2).max(30),
   }),
 });
 
 module.exports.updateAvatarValidator = celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().pattern(this.regExeLink),
+    avatar: Joi.string().required().pattern(this.regExeLink),
   }),
 });
 

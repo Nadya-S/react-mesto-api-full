@@ -26,10 +26,10 @@ const app = express();
 app.use(corsHandling);
 
 app.use(helmet());
+app.use(requestLogger);
 app.use(limiter);
 
 app.use(express.json());
-app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -41,7 +41,7 @@ app.use('/', authRouter);
 
 app.use('/users', auth, userRouter);
 app.use('/cards', auth, cardRouter);
-app.use('*', () => {
+app.use('*', auth, () => {
   throw new NotFoundError('Путь не найден');
 });
 
